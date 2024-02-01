@@ -1,3 +1,5 @@
+import Navbar from "@/components/navbar";
+
 const DashboardLayout = ({ children }: { children: React.ReactNode }) => {
   return (
     <div className="h-full relative">
@@ -5,7 +7,7 @@ const DashboardLayout = ({ children }: { children: React.ReactNode }) => {
         <div>Sidebar</div>
       </div>
       <main className="md:pl-72">
-        Navbar {children}
+        <Navbar /> {children}
         Content
       </main>
     </div>
