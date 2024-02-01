@@ -1,0 +1,2 @@
+# aide
+Aide - AI Assistant
