@@ -1,20 +1,58 @@
-"user client";
+"use client";
 
 import { Card } from "@/components/ui/card";
-import { ArrowRight, MessageSquare } from "lucide-react";
+import {
+  ArrowRight,
+  Code,
+  ImageIcon,
+  MessageSquare,
+  Music,
+  VideoIcon,
+} from "lucide-react";
 import { cn } from "@/lib/utils";
+import { useRouter } from "next/navigation";
 
 const tools = [
   {
     label: "Conversation",
     icon: MessageSquare,
-    color: "text-violet-500",
-    bgColor: "bg-violet-500/10",
+    color: "text-violet-700",
+    bgColor: "bg-violet-700/10",
     href: "/conversation",
+  },
+  {
+    label: "Image Generation",
+    icon: ImageIcon,
+    color: "text-yellow-700",
+    bgColor: "bg-yellow-700/10",
+    href: "/image",
+  },
+  {
+    label: "Video Generation",
+    icon: VideoIcon,
+    color: "text-pink-700",
+    bgColor: "bg-pink-700/10",
+    href: "/video",
+  },
+  {
+    label: "Music Generation",
+    icon: Music,
+    color: "text-emerald-700",
+    bgColor: "bg-emerald-700/10",
+    href: "/music",
+  },
+  {
+    label: "Code Generation",
+    icon: Code,
+    color: "text-red-700",
+    bgColor: "bg-red-700/10",
+    href: "/code",
   },
 ];
 
 const DashboardPage = () => {
+  const router = useRouter();
+
   return (
     <div>
       <div className="mb-8 space-y-4">
@@ -28,6 +66,7 @@ const DashboardPage = () => {
       <div className="px-4 md:px-20 lg:px-32 space-y-4">
         {tools.map((tool) => (
           <Card
+            onClick={() => router.push(tool.href)}
             key={tool.href}
             className="p-4 border-black/5 flex items-center justify-between hover:shadow-md transition cursor-pointer"
           >
