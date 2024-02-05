@@ -13,6 +13,7 @@ import axios from "axios";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { ChatCompletionRequestMessage } from "openai";
+import Empty from "@/components/empty";
 
 const ConversationPage = () => {
   const router = useRouter();
@@ -108,6 +109,11 @@ const ConversationPage = () => {
           </Form>
         </div>
         <div className="space-y-4 mt-4">
+          {messages.length === 0 && !isLoading && (
+            <div>
+              <Empty label="No conversation yet" />
+            </div>
+          )}
           <div className="flex flex-col-reverse gap-y-4">
             {messages.map((message) => (
               <div key={message.content}>{message.content}</div>
