@@ -124,20 +124,30 @@ const ConversationPage = () => {
             </div>
           )}
           <div className="flex flex-col-reverse gap-y-4">
-            {messages.map((message) => (
-              <div
-                key={message.content}
-                className={cn(
-                  "p-8 w-full flex items-start gap-x-8 rounded-lg",
-                  message.role === "user"
-                    ? "bg-white border border-black/10"
-                    : "bg-muted"
-                )}
-              >
-                {message.role === "user" ? <UserAvatar /> : <BotAvatar />}
-                <p className="text-sm">{message.content}</p>
-              </div>
-            ))}
+            {messages.map(
+              (
+                message,
+                index //! Work around to fix Type Error for deployment
+              ) => (
+                <div
+                  key={index} //! Work around to fix Type Error for deployment. Org: {message.content}
+                  className={cn(
+                    "p-8 w-full flex items-start gap-x-8 rounded-lg",
+                    message.role === "user"
+                      ? "bg-white border border-black/10"
+                      : "bg-muted"
+                  )}
+                >
+                  {message.role === "user" ? <UserAvatar /> : <BotAvatar />}
+                  {typeof message.content === "string" ? ( //! Work around to fix Type Error for deployment
+                    <p className="text-sm">{message.content}</p>
+                  ) : (
+                    // Handle other types of content here, or provide a default fallback
+                    <p className="text-sm">Unsupported content type</p>
+                  )}
+                </div>
+              )
+            )}
           </div>
         </div>
       </div>
