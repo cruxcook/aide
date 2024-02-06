@@ -1,7 +1,7 @@
 "use client"; // To be able to use hooks and contexts
 
 import { Heading } from "@/components/heading";
-import { MessageSquare } from "lucide-react";
+import { Code } from "lucide-react";
 import { useForm } from "react-hook-form";
 import * as z from "zod";
 import { formSchema } from "./constants";
@@ -19,7 +19,7 @@ import { cn } from "@/lib/utils";
 import { UserAvatar } from "@/components/user-avatar";
 import { BotAvatar } from "@/components/bot-avatar";
 
-const ConversationPage = () => {
+const CodePage = () => {
   const router = useRouter();
   const [messages, setMessages] = useState<ChatCompletionMessageParam[]>([]);
 
@@ -41,7 +41,7 @@ const ConversationPage = () => {
 
       const newMessages = [...messages, userMessage];
 
-      const response = await axios.post("/api/conversation", {
+      const response = await axios.post("/api/code", {
         messages: newMessages,
       });
 
@@ -59,11 +59,11 @@ const ConversationPage = () => {
   return (
     <div>
       <Heading
-        title="Conversation"
-        description="The most advanced conversation model."
-        icon={MessageSquare}
-        iconColor="text-violet-500"
-        bgColor="bg-violet-500/10"
+        title="Code Generation"
+        description="Generate code using descriptive text."
+        icon={Code}
+        iconColor="text-red-500"
+        bgColor="bg-red-500/10"
       />
       <div className="px-4 lg:px-8">
         <div>
@@ -96,7 +96,7 @@ const ConversationPage = () => {
                           focus-visible:ring-transparent
                         "
                         disabled={isLoading}
-                        placeholder="What is OpenAI?"
+                        placeholder="Give an example of Golang API"
                         {...field} // Replace for `onChange`, `onBlur`, `value`
                       />
                     </FormControl>
@@ -155,4 +155,4 @@ const ConversationPage = () => {
   );
 };
 
-export default ConversationPage;
+export default CodePage;
