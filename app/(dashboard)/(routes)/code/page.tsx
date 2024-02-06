@@ -12,12 +12,13 @@ import { Button } from "@/components/ui/button";
 import axios from "axios";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
-import { ChatCompletionMessageParam } from "openai/resources/chat/completions";
+import { ChatCompletionMessageParam } from "openai/resources/index.mjs";
 import Empty from "@/components/empty";
 import { Loader } from "@/components/loader";
 import { cn } from "@/lib/utils";
 import { UserAvatar } from "@/components/user-avatar";
 import { BotAvatar } from "@/components/bot-avatar";
+import Markdown from "react-markdown";
 
 const CodePage = () => {
   const router = useRouter();
@@ -140,7 +141,24 @@ const CodePage = () => {
                 >
                   {message.role === "user" ? <UserAvatar /> : <BotAvatar />}
                   {typeof message.content === "string" ? ( //! Work around to fix Type Error for deployment
-                    <p className="text-sm">{message.content}</p>
+                    <Markdown
+                      components={{
+                        pre: ({ node, ...props }) => (
+                          <div className="overflow-auto w-full my-4 bg-black/10 p-2 rounded-lg">
+                            <pre {...props} />
+                          </div>
+                        ),
+                        code: ({ node, ...props }) => (
+                          <code
+                            className="bg-black/10 rounded-lg p-1"
+                            {...props}
+                          />
+                        ),
+                      }}
+                      className="text-sm overflow-hidden leading-7"
+                    >
+                      {message.content || ""}
+                    </Markdown>
                   ) : (
                     // Handle other types of content here, or provide a default fallback
                     <p className="text-sm">Unsupported content type</p>
