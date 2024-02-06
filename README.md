@@ -2,6 +2,10 @@
 
 > Developed in [Next.js](https://nextjs.org/), [Tailwind CSS](https://tailwindcss.com/), [TypeScript](https://www.typescriptlang.org/), [Shadcn/UI](https://ui.shadcn.com/), [Clerk](https://clerk.com/).
 
+<p align="center">
+    <img src="./public/dashboard-screenshot.webp" alt="Dashboard Screenshot">
+</p>
+
 ## Contents
 
 -   [Prerequisites](#1-prerequisites)
@@ -23,6 +27,7 @@
 - Client form validation and handling using [react-hook-form](https://react-hook-form.com/).
 - Page loading state.
 - Conversation Generation Tool (Open AI).
+- Code Generation Tool (Open AI)
 
 ### 3. Usage
 
@@ -32,9 +37,15 @@
 git clone https://github.com/cruxcook/aide.git
 ```
 
-- Configure ".env" file
+- Set up environment
 
+```bash
+cp .emv.example .emv
 ```
+
+- Configure environment
+
+```bash
 NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY=
 CLERK_SECRET_KEY=
 
